@@ -7,14 +7,16 @@
 
 import React from 'react';
 
-import LotsOfStyles from './src/components/LotsOfStyle';
 import {NavigationContainer} from '@react-navigation/native';
 import AppRouter from './src/router/AppRouter';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 function App(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <AppRouter />
+      {/* <GestureHandlerRootView style={{flex: 1}}> */}
+        <AppRouter />
+      {/* </GestureHandlerRootView> */}
     </NavigationContainer>
   );
 }

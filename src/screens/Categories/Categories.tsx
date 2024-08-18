@@ -2,7 +2,7 @@ import {StatusBar, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {myColors} from '../../utils/Themes/Colors';
 
-const Cart = () => {
+const Categories = () => {
   return (
     <View
       style={{
@@ -14,12 +14,12 @@ const Cart = () => {
           color: myColors.black,
           fontSize: 20,
         }}>
-        Cart
+        Categories
       </Text>
     </View>
   );
 };
 
-export default Cart;
+export default Categories;
 
 const styles = StyleSheet.create({});

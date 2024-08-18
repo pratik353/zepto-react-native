@@ -45,7 +45,7 @@ const Splash = ({navigation}) => {
           alignContent: 'center',
           backgroundColor: myColors.violate,
         }}>
-        <StatusBar translucent backgroundColor="transparent" />
+        <StatusBar translucent backgroundColor={myColors.violate} />
         <Image
           style={{width: responsiveWidth(100), height: 80}}
           source={require('../../assets/images/zeptoLogo.png')}

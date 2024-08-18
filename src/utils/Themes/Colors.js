@@ -1,8 +1,10 @@
 export const myColors = {
-    // violate:'#260343',
-    // violate:'#421168',
+
     violate:'#3F016A',
+    primary:'#950EDB',
     black:'black',
     white:'white',
-    gray:'gray'
+    gray:'gray',
+    lightGray:'#e3e1e1',
+    buttonPrimary:'#EE386A',
 }

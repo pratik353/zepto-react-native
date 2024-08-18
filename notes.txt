@@ -1,0 +1,19 @@
+# OPEN APP ON MOBILE --> WIRELESS
+1. Install react native dev app on mobile
+2. open app --> you will see error with red screen 
+3. shake the mobile --> will open dev menu list 
+4. click on settings 
+5. click on Debug server host & port for device
+6. add your wifi ip --> 192.***.**:8081 ( 8081 --> APP PORT )
+7. then reload the application from terminal
+
+
+# Important libraries:-
+1. react-native-svg: https://www.npmjs.com/package/react-native-svg#features
+2. gesture-handler: https://www.npmjs.com/package/react-native-gesture-handler
+3. react-native-animation: https://www.npmjs.com/package/react-native-reanimated 
+4. biometrics: https://www.npmjs.com/package/react-native-biometrics
+5. get geo-location: https://www.npmjs.com/package/react-native-geolocation-service
+6. navigation between screens: https://www.npmjs.com/package/react-native-geolocation-service
+7. icons: https://www.npmjs.com/package/react-native-vector-icons
+8. https://www.npmjs.com/package/react-native-safe-area-context

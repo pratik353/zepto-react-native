@@ -21,6 +21,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {CommonActions} from '@react-navigation/native';
 
+import ReactNativeBiometrics, {BiometryTypes} from 'react-native-biometrics';
+
 import {
   GoogleSignin,
   statusCodes,
@@ -71,6 +73,92 @@ const Login = ({navigation}) => {
           console.log('try again later');
         // some other error happened
       }
+    }
+  };
+
+  const enableBiometricAuth = () => {
+    const rnBiometrics = new ReactNativeBiometrics();
+    rnBiometrics
+      .isSensorAvailable()
+      .then(resultObject => {
+        const {available, biometryType} = resultObject;
+
+        console.log('resultObject', resultObject);
+
+        if (available && biometryType === BiometryTypes.TouchID) {
+          Alert.alert(
+            'TouchID',
+            'Would you like to enable TouchID authentication for the next time?',
+            [
+              {
+                text: 'Yes please',
+                onPress: async () => {
+                  Alert.alert(
+                    'Success!',
+                    'TouchID authentication enabled successfully!',
+                  );
+                },
+              },
+              {text: 'Cancel', style: 'cancel'},
+            ],
+          );
+        } else if (available && biometryType === BiometryTypes.FaceID) {
+          Alert.alert(
+            'FaceID',
+            'Would you like to enable FaceID authentication for the next time?',
+            [
+              {
+                text: 'Yes please',
+                onPress: async () => {
+                  Alert.alert(
+                    'Success!',
+                    'FaceID authentication enabled successfully!',
+                  );
+                },
+              },
+              {text: 'Cancel', style: 'cancel'},
+            ],
+          );
+        } else if (available && biometryType === BiometryTypes.Biometrics) {
+          Alert.alert(
+            'Device Supported Biometrics',
+            'Biometrics authentication is supported.',
+          );
+        } else {
+          Alert.alert(
+            'Biometrics not supported',
+            'This device does not support biometric authentication.',
+          );
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        Alert.alert(
+          'Error',
+          'An error occurred while checking biometrics availability.',
+        );
+      });
+  };
+
+  const handleBiometricAuth = async () => {
+    try {
+      const rnBiometrics = new ReactNativeBiometrics();
+      const {success, error} = await rnBiometrics.simplePrompt({
+        promptMessage: 'Authenticate to continue',
+        // cancelButtonText:'Cancel'
+      });
+
+      if (success) {
+        Alert.alert('Success', 'Biometric authentication successful');
+        return true;
+      } else {
+        Alert.alert('Authentication failed', 'Biometric authentication failed');
+        return false;
+      }
+    } catch (error) {
+      console.error('[handleBiometricAuth] Error:', error);
+      Alert.alert('Error', 'Biometric authentication failed from device');
+      return false;
     }
   };
 
@@ -195,10 +283,9 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 100,
     paddingVertical: 12,
-    backgroundColor: '#EE386A',
+    backgroundColor: myColors.buttonPrimary,
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 500,
-    // color: myColors.white,
   },
 });
