@@ -12,7 +12,7 @@ import {
 
 import CheckBox from '@react-native-community/checkbox';
 
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import AppWrapper from '../../components/AppWrapper';
 import {myColors} from '../../utils/Themes/Colors';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
@@ -31,10 +31,6 @@ import {
 const Login = ({navigation}) => {
   const [termsChecked, setTermsChecked] = useState(false);
   const [user, setUser] = useState<any>(null);
-
-  useEffect(() => {
-    GoogleSignin.configure();
-  }, []);
 
   // Somewhere in your code
   const _signIn = async () => {
@@ -165,7 +161,7 @@ const Login = ({navigation}) => {
   return (
     <AppWrapper>
       <View style={{flex: 1, backgroundColor: myColors.violate}}>
-        <StatusBar translucent backgroundColor="transparent" />
+        <StatusBar translucent backgroundColor={myColors.violate} />
         <View
           style={{
             flex: 1,

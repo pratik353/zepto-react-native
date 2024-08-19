@@ -10,10 +10,12 @@ const Categories = () => {
         marginTop: StatusBar.currentHeight,
       }}>
       <Text
-        style={{
+        /* style={{
           color: myColors.black,
           fontSize: 20,
-        }}>
+        }} */
+        className="text-xl"
+        >
         Categories
       </Text>
     </View>

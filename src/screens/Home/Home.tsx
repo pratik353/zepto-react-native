@@ -15,20 +15,18 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import {myColors} from '../../utils/Themes/Colors';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {CommonActions} from '@react-navigation/native';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import AppWrapper from '../../components/AppWrapper';
 import Geolocation from 'react-native-geolocation-service';
 import axios from 'axios';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 
-import {PanGestureHandler} from 'react-native-gesture-handler';
-import {Dimensions} from 'react-native';
 import LinearGradientBg from '../../components/background/LinearGradientBg';
+import HomeTitle from '../../components/HomeTitle';
+import ProductList from '../../components/ProductList';
+import {groceryCategories, products} from '../../utils/mockdata/MOCK_DATA ';
+import GridCategories from '../../components/GridCategories';
 
 const Home = ({navigation}) => {
   const [userLocation, setUserLocation] = useState<{
@@ -119,24 +117,6 @@ const Home = ({navigation}) => {
 
   return (
     <AppWrapper>
-      {/* <Text style={{color: myColors.black}}>Home</Text>
-      <TouchableOpacity
-        onPress={async () => {
-          try {
-            await GoogleSignin.signOut();
-            AsyncStorage.removeItem('key');
-            navigation.dispatch(
-              CommonActions.reset({
-                index: 0,
-                routes: [{name: 'Login'}], // Replace 'HomeScreen' with your target screen
-              }),
-            );
-          } catch (error) {
-            console.error(error);
-          }
-        }}>
-        <Text>Logout</Text>
-      </TouchableOpacity> */}
       <StatusBar translucent backgroundColor={myColors.primary} />
       <AppHeader
         userLocation={!!userLocation.latitude && !!userLocation.longitude}
@@ -159,11 +139,11 @@ const Home = ({navigation}) => {
 const AppHeader = ({
   userLocation,
   isLocationEnabled,
-  navigation
+  navigation,
 }: {
   userLocation: boolean;
   isLocationEnabled: boolean;
-  navigation: any
+  navigation: any;
 }) => {
   return (
     <View
@@ -181,9 +161,11 @@ const AppHeader = ({
           gap: 6,
         }}>
         <View>
-          <TouchableOpacity activeOpacity={1} onPress={()=>{
-            navigation.navigate('Settings')
-          }}>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => {
+              navigation.navigate('Settings');
+            }}>
             <Ionicons
               name="person-circle-outline"
               size={45}
@@ -305,7 +287,8 @@ const AppBody = () => {
 
   return (
     <View style={{paddingTop: 0, flex: 1}}>
-      <LinearGradientBg flex={1} from_color={myColors.primary} to_color="#fff">
+      {/* <LinearGradientBg flex={1} from_color={myColors.primary} to_color="#fff"> */}
+      <View style={{backgroundColor: myColors.primary}}>
         <FlatList
           ref={flatListRef}
           data={banners}
@@ -319,7 +302,29 @@ const AppBody = () => {
           onScroll={onScroll}
           ItemSeparatorComponent={() => <View style={{width: 20}}></View>}
         />
-      </LinearGradientBg>
+      </View>
+      <View className="h-full">
+        <View
+          style={{
+            backgroundColor: myColors.primary,
+            paddingHorizontal: 20,
+            paddingBottom: 20,
+            borderBottomEndRadius:15,
+            borderBottomStartRadius:15,
+          }}>
+          <HomeTitle title="Your go-to items" subtitle="" color="white" />
+          <ProductList data={products.slice(0, 11)} />
+        </View>
+        <View
+          style={{
+            paddingHorizontal: 20,
+            // borderWidth:1,
+          }}>
+          <HomeTitle title="Explore by categories" subtitle="See all" />
+          <GridCategories data={groceryCategories} />
+        </View>
+      </View>
+      {/* </LinearGradientBg> */}
     </View>
   );
 };

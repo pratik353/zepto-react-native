@@ -7,6 +7,7 @@ import Cart from '../screens/Cart/Cart';
 import Wishlist from '../screens/Wishlist/Wishlist';
 import TabsNavigator from '../components/tabs-navigator/TabsNavigator';
 import Settings from '../screens/Settings/Settings';
+import Categories from '../screens/Categories/Categories';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,17 +15,30 @@ const AppRouter = () => {
   return (
     <Stack.Navigator
       initialRouteName="Splash"
-      screenOptions={{
-        headerShown: false,
-      }}>
-      <Stack.Screen name="Splash" component={Splash} />
-      <Stack.Screen name="Home" component={TabsNavigator} />
-      <Stack.Screen name="Details" component={Details} />
-      <Stack.Screen name="Login" component={Login} />
-      {/* <Stack.Screen name="Cart" component={Cart} /> */}
-      <Stack.Screen name="Settings" component={Settings} />
-      <Stack.Screen name="Wishlist" component={Wishlist} />
+      screenOptions={
+        {
+          // headerShown: false,
+        }
+      }>
+      {stackScreen('Splash', Splash)}
+      {stackScreen('Home', TabsNavigator)}
+      {stackScreen('Details', Details)}
+      {stackScreen('Login', Login)}
+      {stackScreen('Settings', Settings, true)}
+      {stackScreen('Wishlist', Wishlist)}
     </Stack.Navigator>
+  );
+};
+
+const stackScreen = (name, component, headerShown = false) => {
+  return (
+    <Stack.Screen
+      options={{
+        headerShown,
+      }}
+      name={name}
+      component={component}
+    />
   );
 };
 

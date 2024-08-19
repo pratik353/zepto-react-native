@@ -1,67 +1,77 @@
 import React from 'react';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Text, View} from 'react-native';
+import {Dimensions, StatusBar, Text, View} from 'react-native';
 import Home from '../../screens/Home/Home';
 import Cart from '../../screens/Cart/Cart';
 import Categories from '../../screens/Categories/Categories';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {myColors} from '../../utils/Themes/Colors';
 
+const {width, height} = Dimensions.get('window');
+
+const statusBarHeight = StatusBar.currentHeight || 0;
+
 const Tab = createBottomTabNavigator();
 
 const TabsNavigator = () => {
   return (
-    <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarStyle: {
-          height: 80,
-        },
+    <View
+      style={{
+        width,
+        height: height + statusBarHeight,
       }}>
-      <Tab.Screen
-        name="Zepto"
-        options={{
-          tabBarIcon: ({focused}) => (
-            <TabIconAndLabel
-              focused={focused}
-              iconName={'home'}
-              label={'Zepto'}
-            />
-          ),
-          tabBarLabel: () => null,
-        }}
-        component={Home}
-      />
-      <Tab.Screen
-        name="Categories"
-        options={{
-          tabBarIcon: ({focused}) => (
-            <TabIconAndLabel
-              focused={focused}
-              iconName={'rocket'}
-              label={'Categories'}
-            />
-          ),
-          tabBarLabel: () => null, // Hide the default label to avoid duplication
-        }}
-        component={Categories}
-      />
-      <Tab.Screen
-        name="Cart"
-        options={{
-          tabBarIcon: ({focused}) => (
-            <TabIconAndLabel
-              focused={focused}
-              iconName={'cart'}
-              label={'Cart'}
-            />
-          ),
-          tabBarLabel: () => null,
-        }}
-        component={Cart}
-      />
-    </Tab.Navigator>
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: {
+            height: 80,
+          },
+        }}>
+        <Tab.Screen
+          name="Zepto"
+          options={{
+            tabBarIcon: ({focused}) => (
+              <TabIconAndLabel
+                focused={focused}
+                iconName={'home'}
+                label={'Zepto'}
+              />
+            ),
+            tabBarLabel: () => null,
+          }}
+          component={Home}
+        />
+        <Tab.Screen
+          name="Categories"
+          options={{
+            tabBarIcon: ({focused}) => (
+              <TabIconAndLabel
+                focused={focused}
+                iconName={'rocket'}
+                label={'Categories'}
+              />
+            ),
+            tabBarLabel: () => null, // Hide the default label to avoid duplication
+          }}
+          component={Categories}
+        />
+        <Tab.Screen
+          name="Cart"
+          options={{
+            tabBarIcon: ({focused}) => (
+              <TabIconAndLabel
+                focused={focused}
+                iconName={'cart'}
+                label={'Cart'}
+              />
+            ),
+            tabBarLabel: () => null,
+          }}
+          component={Cart}
+        />
+      </Tab.Navigator>
+    </View>
   );
 };
 
