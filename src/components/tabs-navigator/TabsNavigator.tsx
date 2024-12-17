@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Dimensions, StatusBar, Text, View} from 'react-native';
+import {Dimensions, StatusBar, Text, Vibration, View} from 'react-native';
 import Home from '../../screens/Home/Home';
 import Cart from '../../screens/Cart/Cart';
 import Categories from '../../screens/Categories/Categories';
@@ -14,7 +14,7 @@ const statusBarHeight = StatusBar.currentHeight || 0;
 
 const Tab = createBottomTabNavigator();
 
-const TabsNavigator = () => {
+const TabsNavigator = ({navigation}) => {
   return (
     <View
       style={{
@@ -58,6 +58,13 @@ const TabsNavigator = () => {
         />
         <Tab.Screen
           name="Cart"
+          listeners={()=>({
+            tabPress:(e)=>{
+              e.preventDefault();
+              Vibration.vibrate()
+              navigation.navigate('Cart');
+            }
+          })}
           options={{
             tabBarIcon: ({focused}) => (
               <TabIconAndLabel

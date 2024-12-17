@@ -124,14 +124,13 @@ const Home = ({navigation}) => {
         navigation={navigation}
       />
       {/* </LinearGradientBg> */}
-      <ScrollView
-        contentContainerStyle={{flexGrow: 1, backgroundColor: '#fff'}}>
+      <ScrollView contentContainerStyle={{flexGrow: 1, backgroundColor: '#fff'}}>
         <AppBody />
       </ScrollView>
-      <AppFooter
+      {/* <AppFooter
         enableLocation={requestLocationPermission}
         locationModalVisible={locationModalVisible}
-      />
+      /> */}
     </AppWrapper>
   );
 };
@@ -309,8 +308,8 @@ const AppBody = () => {
             backgroundColor: myColors.primary,
             paddingHorizontal: 20,
             paddingBottom: 20,
-            borderBottomEndRadius:15,
-            borderBottomStartRadius:15,
+            borderBottomEndRadius: 15,
+            borderBottomStartRadius: 15,
           }}>
           <HomeTitle title="Your go-to items" subtitle="" color="white" />
           <ProductList data={products.slice(0, 11)} />
